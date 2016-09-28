@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import CommentList from './CommentList'
 
 export default class Article extends Component {
 
     state = {
-        isOpen: false,
+        isOpen: true,
         opened: {
             a: true
         }
@@ -14,11 +15,13 @@ export default class Article extends Component {
         const { isOpen } = this.state
 
         const body = isOpen ? <section>{article.text}</section> : null
+        const comments = typeof article.comments != 'undefined' ? <CommentList comments={article.comments} /> : null
 
         return (
             <div>
                 <h3 onClick = {this.toggleOpen}>{article.title}</h3>
                 {body}
+                {comments}
             </div>
         )
     }
