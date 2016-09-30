@@ -13,7 +13,7 @@ export default class Article extends Component {
     render() {
         const { article } = this.props
         const { isOpen } = this.state
-
+        //логичнее эту проверку в CommentList делать
         const comments = typeof article.comments != 'undefined' ? <CommentList comments={article.comments} /> : null
         const body = isOpen ? (
             <div>
