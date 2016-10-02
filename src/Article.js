@@ -4,27 +4,19 @@ import CommentList from './CommentList'
 export default class Article extends Component {
 
     state = {
-        isOpen: false,
         opened: {
             a: true
         }
     }
 
     render() {
-        const { article } = this.props
-        const { isOpen } = this.state
-        //логичнее эту проверку в CommentList делать
-        const comments = typeof article.comments != 'undefined' ? <CommentList comments={article.comments} /> : null
-        const body = isOpen ? (
-            <div>
-                <section>{article.text}</section>
-                <section>{comments}</section>
-            </div>
-        ) : null
+        const { article, isOpen, openArticle } = this.props
+
+        const body = isOpen ? <section>{article.text}<CommentList comments = {article.comments}/></section> : null
 
         return (
             <div>
-                <h3 onClick = {this.toggleOpen}>{article.title}</h3>
+                <h3 onClick = {openArticle}>{article.title}</h3>
                 {body}
             </div>
         )
