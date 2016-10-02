@@ -21,7 +21,10 @@ export default class Article extends Component {
     render() {
         const { article, isOpen, openArticle } = this.props
 
-        const body = isOpen ? <section>{article.text}<CommentList comments = {article.comments}/></section> : null
+        const body = isOpen ? (<section>
+            <div onClick = {openArticle}>{article.text}</div>
+            <CommentList comments = {article.comments}/>
+        </section>) : null
 
         return (
             <div>
