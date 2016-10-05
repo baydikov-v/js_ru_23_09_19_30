@@ -52,17 +52,17 @@ class Filter extends Component {
                     multi = {true}
                     onChange = {this.handleChange}
                 />
-                { from && to &&
-                    <p>
-                        Date selected form { this.convertDate(from) } to { this.convertDate(to) }.<br />
-                        <a href="" onClick={this.handleResetClick.bind(this)}>Reset</a>
-                    </p>
-                }
                 <DayPicker
                     disabledDays={ sunday }
                     selectedDays={ day => DateUtils.isDayInRange(day, { from, to }) }
                     onDayClick={ this.handleDayClick.bind(this) }
                 />
+                { from && to &&
+                <p style={{textAlign: "center"}}>
+                Date selected form { this.convertDate(from) } to { this.convertDate(to) }.<br />
+                    <a href="" onClick={this.handleResetClick.bind(this)}>Reset</a>
+                </p>
+                    }
             </div>
         )
     }
