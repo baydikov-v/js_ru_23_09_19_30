@@ -1,6 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
+import DayPicker, { DateUtils } from "react-day-picker";
 import 'react-select/dist/react-select.css'
+import 'react-day-picker/lib/style.css'
+
+function sunday(day) {
+    return day.getDay() === 0;
+}
 
 class Filter extends Component {
     static propTypes = {
@@ -8,12 +14,30 @@ class Filter extends Component {
     };
 
     state = {
-        selected: null
+        selected: null,
+        from: null,
+        to: null
     }
 
-    handleChange = selected => this.setState({ selected })
+    handleDayClick(e, day) {
+        const range = DateUtils.addDayToRange(day, this.state);
+        this.setState(range);
+    }
+    handleResetClick(e) {
+        e.preventDefault();
+        this.setState({
+            from: null,
+            to: null
+        });
+    }
+    convertDate (inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
+    }
 
     render() {
+        const { from, to } = this.state
         const { articles } = this.props
         const { selected } = this.state
         const options = articles.map(article => ({
@@ -27,6 +51,17 @@ class Filter extends Component {
                     value = {selected}
                     multi = {true}
                     onChange = {this.handleChange}
+                />
+                { from && to &&
+                    <p>
+                        Date selected form { this.convertDate(from) } to { this.convertDate(to) }.<br />
+                        <a href="" onClick={this.handleResetClick.bind(this)}>Reset</a>
+                    </p>
+                }
+                <DayPicker
+                    disabledDays={ sunday }
+                    selectedDays={ day => DateUtils.isDayInRange(day, { from, to }) }
+                    onDayClick={ this.handleDayClick.bind(this) }
                 />
             </div>
         )
