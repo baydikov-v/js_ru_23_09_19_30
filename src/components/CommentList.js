@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from './../decorators/toggleOpen'
+import CommentForm from './CommentForm'
 
 function CommentList(props) {
     const { comments, isOpen, toggleOpen } = props
@@ -8,7 +9,7 @@ function CommentList(props) {
 
     const commentItems = comments.map(comment => <li key={comment.id}><Comment comment={comment}/></li>)
     const text = isOpen ? 'hide comments' : `show ${comments.length} comments`
-    const body = isOpen && <ul>{commentItems}</ul>
+    const body = isOpen && <div><ul>{commentItems}</ul><CommentForm /></div>
 
     return (
         <div>
