@@ -7,7 +7,7 @@ import 'react-day-picker/lib/style.css'
 function sunday(day) {
     return day.getDay() === 0;
 }
-
+//здесь появляется много логики, пора разбивать на более мелкие компоненты
 class Filter extends Component {
     static propTypes = {
         articles: PropTypes.array.isRequired
@@ -57,6 +57,7 @@ class Filter extends Component {
                     selectedDays={ day => DateUtils.isDayInRange(day, { from, to }) }
                     onDayClick={ this.handleDayClick.bind(this) }
                 />
+                {/*Не пиши столько кода в JSX*/}
                 { from && to &&
                 <p style={{textAlign: "center"}}>
                 Date selected form { this.convertDate(from) } to { this.convertDate(to) }.<br />
