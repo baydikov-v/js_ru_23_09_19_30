@@ -6,6 +6,7 @@ export default (filters, action) => {
 
     switch (type) {
         case SELECT_ARTICLES:
+            //нет, мутировать данные - очень плохая практика. Нужно возвращать новое состояние, не меняя старое
             filters.selected = payload.data;
             return filters;
         case SELECT_DATE_RANGE:
