@@ -9,6 +9,7 @@ export default (articles = defaultArticles, action) => {
         case DELETE_ARTICLE:
             return articles.filter(article => article.id != payload.id)
         case SEARCH_ARTICLES:
+            //ты так теряешь статьи, не надо их удалять; просто сделай фильтрацию в коннекте
             const filters = payload.filters;
             var results = articles;
             if (typeof filters.selected != 'undefined' && filters.selected.length) {
