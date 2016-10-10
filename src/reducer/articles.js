@@ -16,6 +16,14 @@ export default (articles = defaultArticles, action) => {
                     return filters.selected.indexOf(article.id) != -1;
                 })
             }
+            if (typeof filters.select_date_range != 'undefined' && filters.select_date_range.from && filters.select_date_range.to) {
+                const from = Date.parse(filters.select_date_range.from);
+                const to = Date.parse(filters.select_date_range.to);
+                results = results.filter(article => {
+                    const article_date = Date.parse(article.date);
+                    return article_date > from && article_date < to;
+                })
+            }
             return results;
 
 
