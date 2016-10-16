@@ -20,7 +20,6 @@ class Filter extends Component {
             <div>
                 <DatePicker />
                 <SelectFilter articles = {articles} />
-                <button onClick={this.handleChange}>Search</button>
             </div>
         )
     }
