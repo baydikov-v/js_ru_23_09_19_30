@@ -1,17 +1,24 @@
-import { SELECT_ARTICLES } from '../constants'
-import { SELECT_DATE_RANGE } from '../constants'
+import { CHANGE_DATE_RANGE, CHANGE_SELECTION } from '../constants'
+import { Map } from 'immutable'
 
-export default (filters, action) => {
+const defaultFilters = new Map({
+    selected: [],
+    dateRange: {
+        from: null,
+        to: null
+    }
+})
+
+export default (filters = defaultFilters, action) => {
     const { type, payload } = action
 
     switch (type) {
-        case SELECT_ARTICLES:
-            //нет, мутировать данные - очень плохая практика. Нужно возвращать новое состояние, не меняя старое
-            filters.selected = payload.data;
-            return filters;
-        case SELECT_DATE_RANGE:
-            filters.select_date_range = payload.date_range;
-            return filters;
+        case CHANGE_DATE_RANGE:
+            return filters.set('dateRange', payload.dateRange)
+
+        case CHANGE_SELECTION:
+            return filters.set('selected', payload.selected)
     }
-    return {};
+
+    return filters
 }

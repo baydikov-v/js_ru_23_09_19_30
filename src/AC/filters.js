@@ -1,15 +1,15 @@
-import { SELECT_ARTICLES } from '../constants'
-import { SELECT_DATE_RANGE } from '../constants'
+import { CHANGE_DATE_RANGE, CHANGE_SELECTION } from '../constants'
 
-export function selectArticles(data) {
+export function changeDateRange(dateRange) {
     return {
-        type: SELECT_ARTICLES,
-        payload: { data }
+        type: CHANGE_DATE_RANGE,
+        payload: { dateRange }
     }
 }
-export function selectDateRange(range) {
+
+export function changeSelection(selected) {
     return {
-        type: SELECT_DATE_RANGE,
-        payload: { date_range: range }
+        type: CHANGE_SELECTION,
+        payload: { selected }
     }
 }
